@@ -38,20 +38,36 @@ function agregarAmigo() {
     
     // Agrega el nombre al array amigos
     amigos.push(nombre);
-    
-    // Obtiene el elemento de la lista en el HTML y lo actualiza
-    const lista = document.getElementById("listaAmigos");
-    lista.innerHTML = "";
-    
-    // Convierte los nombres almacenados en el array en una lista HTML
-    lista.innerHTML = "<li>" + amigos.join("</li><li>") + "</li>";
-    
-    // Limpia el input después de agregar un nombre
+    actualizarLista();
     input.value = "";
 }
 
-// Esta función es para sortear un amigo de la lista
-// Y se asegura de que no se repitan nombres hasta que todos hayan sido sorteados
+// Función para actualizar la lista de amigos en pantalla
+function actualizarLista() {
+    const lista = document.getElementById("listaAmigos");
+    lista.innerHTML = "";
+    
+    for (let i = 0; i < amigos.length; i++) {
+        lista.innerHTML += `<li>${amigos[i]} <button onclick="eliminarAmigo(${i})">❌</button></li>`;
+    }
+}
+
+// Función para eliminar un amigo de la lista
+function eliminarAmigo(indice) {
+    amigos.splice(indice, 1); // Elimina el amigo en la posición dada
+    actualizarLista(); // Refresca la lista en pantalla
+}
+
+// Función para reiniciar el juego
+function reiniciarJuego() {
+    amigos = [];
+    amigosSorteados = [];
+    actualizarLista();
+    alert("Se ha reiniciado el juego. Puedes comenzar de nuevo.");
+}
+
+// Función para sortear un amigo de la lista
+// Se asegura de que no se repitan nombres hasta que todos hayan sido sorteados
 function sortearAmigo() {
     // Verifica que haya al menos dos nombres en la lista antes de sortear
     if (amigos.length < 2) {
@@ -68,8 +84,7 @@ function sortearAmigo() {
     let amigoSorteado;
     let indiceSorteado;
     do {
-
-    // Genera un índice aleatorio dentro del rango del array amigos
+        // Genera un índice aleatorio dentro del rango del array amigos
         indiceSorteado = Math.floor(Math.random() * amigos.length);
         amigoSorteado = amigos[indiceSorteado];
     } while (amigosSorteados.includes(amigoSorteado)); // Repite si el nombre ya fue sorteado
@@ -80,4 +95,3 @@ function sortearAmigo() {
     // Muestra el nombre sorteado en una alerta
     alert("El amigo sorteado es: " + amigoSorteado);
 }
-//FIN
