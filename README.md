@@ -17,7 +17,7 @@
 
 ## 🌐 Despliegue en Vercel
 Puedes probar el proyecto en línea aquí:  
-🔗 [[https://amigo-secreto.vercel.app](https://amigo-secreto.vercel.app)](https://chalenge-amigo-screto.vercel.app/)
+🔗 (https://chalenge-amigo-screto.vercel.app/)
 
 
 
